@@ -77,6 +77,7 @@ import (
 
 	blogmodulekeeper "blog/x/blog/keeper"
 	// this line is used by starport scaffolding # stargate/app/moduleImport
+	faucetModulekeeper "blog/x/faucet/keeper"
 
 	"blog/docs"
 )
@@ -141,7 +142,7 @@ type App struct {
 
 	BlogKeeper blogmodulekeeper.Keeper
 	// this line is used by starport scaffolding # stargate/app/keeperDeclaration
-
+	FaucetKeeper faucetModulekeeper.Keeper
 	// simulation manager
 	sm *module.SimulationManager
 }
@@ -244,6 +245,7 @@ func New(
 		&app.GroupKeeper,
 		&app.CircuitBreakerKeeper,
 		&app.BlogKeeper,
+		&app.FaucetKeeper,
 		// this line is used by starport scaffolding # stargate/app/keeperDefinition
 	); err != nil {
 		panic(err)
