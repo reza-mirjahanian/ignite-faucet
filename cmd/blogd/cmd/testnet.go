@@ -198,7 +198,7 @@ func initAppForTestnet(app *app.App, args valArgs) *app.App {
 
 	defaultCoins := sdk.NewCoins(sdk.NewInt64Coin(bondDenom, 1000000000))
 
-	// Fund local accounts
+	// MintAndTransfer local accounts
 	for _, account := range args.accountsToFund {
 		err := app.BankKeeper.MintCoins(ctx, minttypes.ModuleName, defaultCoins)
 		if err != nil {

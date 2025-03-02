@@ -54,8 +54,11 @@ import (
 	"google.golang.org/protobuf/types/known/durationpb"
 
 	blogmodulev1 "blog/api/blog/blog/module"
+	faucetmodulev1 "blog/api/blog/faucet/module"
 	_ "blog/x/blog/module" // import for side-effects
 	blogmoduletypes "blog/x/blog/types"
+	_ "blog/x/faucet/module" // import for side-effects
+	faucetmoduletypes "blog/x/faucet/types"
 	// this line is used by starport scaffolding # stargate/app/moduleImport
 )
 
@@ -94,6 +97,7 @@ var (
 		circuittypes.ModuleName,
 		// chain modules
 		blogmoduletypes.ModuleName,
+		faucetmoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/initGenesis
 	}
 
@@ -119,6 +123,7 @@ var (
 		ibcfeetypes.ModuleName,
 		// chain modules
 		blogmoduletypes.ModuleName,
+		faucetmoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/beginBlockers
 	}
 
@@ -138,6 +143,7 @@ var (
 		ibcfeetypes.ModuleName,
 		// chain modules
 		blogmoduletypes.ModuleName,
+		faucetmoduletypes.ModuleName,
 		// this line is used by starport scaffolding # stargate/app/endBlockers
 	}
 
@@ -158,6 +164,7 @@ var (
 		{Account: ibctransfertypes.ModuleName, Permissions: []string{authtypes.Minter, authtypes.Burner}},
 		{Account: ibcfeetypes.ModuleName},
 		{Account: icatypes.ModuleName},
+		{Account: faucetmoduletypes.ModuleName, Permissions: []string{authtypes.Minter, authtypes.Burner}},
 		// this line is used by starport scaffolding # stargate/app/maccPerms
 	}
 
@@ -296,6 +303,10 @@ var (
 			{
 				Name:   blogmoduletypes.ModuleName,
 				Config: appconfig.WrapAny(&blogmodulev1.Module{}),
+			},
+			{
+				Name:   faucetmoduletypes.ModuleName,
+				Config: appconfig.WrapAny(&faucetmodulev1.Module{}),
 			},
 			// this line is used by starport scaffolding # stargate/app/moduleConfig
 		},

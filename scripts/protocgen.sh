@@ -13,21 +13,22 @@ for dir in $proto_dirs; do
     # we don't want gogo proto to run for proto files which are natively built for google.golang.org/protobuf
     echo "Generating gogo proto code for $file"
     if grep -q "option go_package" "$file" && grep -H -o -c 'option go_package.*blog/cosmossdk/api' "$file" | grep -q ':0$'; then
-      buf generate --template buf.gen.gogo.yaml $file
+      buf generate --debug --template buf.gen.gogo.yaml $file
     fi
   done
 done
 
-echo "Generating pulsar proto code"
-buf generate --template buf.gen.pulsar.yaml
+echo "Generating pulsar proto started..."
+buf generate --debug  --template buf.gen.pulsar.yaml
 
 cd ..
-
+echo "Generating pulsar proto finished!"
 
 # Move generated files to the correct directories
 rm -rf api && mkdir api
 mv proto/api/* ./api
 mv proto/blog/x/blog/types/* ./x/blog/types
-
+mv proto/blog/x/faucet/types/* ./x/faucet/types
 # Remove proto directories
 rm -rf proto/api proto/blog/x
+echo "ProtocGen file finished!"

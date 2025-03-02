@@ -1,0 +1,46 @@
+syntax = "proto3";
+
+package blog.faucet;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+import "google/api/annotations.proto";
+import "cosmos/base/query/v1beta1/pagination.proto";
+import "blog/faucet/params.proto";
+import "blog/faucet/request.proto";
+
+option go_package = "blog/x/faucet/types";
+
+// Query defines the gRPC querier service.
+service Query {
+
+  // Parameters queries the parameters of the module.
+  rpc Params(QueryParamsRequest) returns (QueryParamsResponse) {
+    option (google.api.http).get = "/blog/faucet/params";
+  }
+
+  // Queries a list of minting data.
+  rpc ListMinted(QueryListMintedRequest) returns (QueryListMintedResponse) {
+    option (google.api.http).get = "/blog/faucet/list_minted";
+  }
+}
+
+// QueryParamsRequest is request type for the Query/Params RPC method.
+message QueryParamsRequest {}
+
+// QueryParamsResponse is response type for the Query/Params RPC method.
+message QueryParamsResponse {
+
+  // params holds all the parameters of this module.
+  Params params = 1
+  [ (gogoproto.nullable) = false, (amino.dont_omitempty) = true ];
+}
+
+message QueryListMintedRequest {
+  string address = 1 ;
+}
+
+message QueryListMintedResponse {
+  Requests requests = 1 ;
+  uint64 totalAmount   = 2;
+}

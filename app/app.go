@@ -1,6 +1,7 @@
 package app
 
 import (
+	faucetModulekeeper "blog/x/faucet/keeper"
 	"io"
 
 	_ "cosmossdk.io/api/cosmos/tx/config/v1" // import for side-effects
@@ -76,7 +77,6 @@ import (
 	ibckeeper "github.com/cosmos/ibc-go/v8/modules/core/keeper"
 
 	blogmodulekeeper "blog/x/blog/keeper"
-	// this line is used by starport scaffolding # stargate/app/moduleImport
 
 	"blog/docs"
 )
@@ -141,7 +141,7 @@ type App struct {
 
 	BlogKeeper blogmodulekeeper.Keeper
 	// this line is used by starport scaffolding # stargate/app/keeperDeclaration
-
+	FaucetKeeper faucetModulekeeper.Keeper
 	// simulation manager
 	sm *module.SimulationManager
 }
@@ -244,6 +244,7 @@ func New(
 		&app.GroupKeeper,
 		&app.CircuitBreakerKeeper,
 		&app.BlogKeeper,
+		&app.FaucetKeeper,
 		// this line is used by starport scaffolding # stargate/app/keeperDefinition
 	); err != nil {
 		panic(err)

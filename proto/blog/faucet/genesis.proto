@@ -1,0 +1,17 @@
+syntax = "proto3";
+package blog.faucet;
+
+import "amino/amino.proto";
+import "gogoproto/gogo.proto";
+import "blog/faucet/params.proto";
+
+option go_package = "blog/x/faucet/types";
+
+// GenesisState defines the blog module's genesis state.
+message GenesisState {
+  // params defines all the parameters of the module.
+  Params params = 1 [
+    (gogoproto.nullable) = false,
+    (amino.dont_omitempty) = true
+  ];
+}
