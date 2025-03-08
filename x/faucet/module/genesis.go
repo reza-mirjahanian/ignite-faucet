@@ -26,7 +26,7 @@ func InitGenesis(ctx sdkTypes.Context, k keeper.Keeper, genState types.GenesisSt
 
 	// Params maxPerRequest and maxPerAddress are modifiable via governance
 	k.ActiveFaucet(ctx, true)
-	k.SetSafeTimeout(ctx, 10*time.Second)
+	k.SetSafeTimeout(ctx, 30*time.Second)
 	k.SetFaucetMaxCapacity(ctx, math.NewInt(2000000000))
 	k.SetMaxPerRequest(ctx, math.NewInt(20))
 	k.SetMaxPerAddress(ctx, math.NewInt(1000))
